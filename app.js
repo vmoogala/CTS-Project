@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Added Imports
+var cors = require('cors');
+var fs = require('fs');
+
+//Routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -13,9 +18,21 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+app.use(cors());
+
+//For logging
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
+  flags: 'a'
+});
+app.use(logger('dev', {
+  stream: accessLogStream
+}));
+
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -39,3 +56,9 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// TODO: To start the server at the end without using debug mode
+
+// var httpServer = require('http').createServer(app).listen(3001, function() {
+//   console.log('Http server started');
+// });
