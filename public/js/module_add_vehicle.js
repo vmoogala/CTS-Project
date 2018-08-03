@@ -55,3 +55,5 @@ modAddVehicle.getAllVehicles = function() {
     }
   });
 }
+
+modAddVehicle.getAllVehicles();
