@@ -90,4 +90,32 @@ router.get('/logout/', function(req, res, next) {
 });
 
 
+router.post('/changeUserPassword/', function(req, res, next) {
+  if (req.body && req.session) {
+    console.log(req.body);
+    bcrypt.hash(req.body.userPassword, 10, function(err, hash) {
+      // Store hash in database
+      if (!err) {
+        console.log(hash);
+        var params = [hash, req.session.userName];
+        db.query('UPDATE user_info set password_hash = ? where user_name = ?;', params,
+          function(error, results, fields) {
+            if (error) {
+              console.log(error);
+              utilities.sendResponse(error, null, 500, res);
+            } else {
+              console.log("success");
+              utilities.sendResponse(null, "success", 200, res);
+            }
+          });
+      } else {
+        utilities.sendResponse(null, "password hash error", 200, res);
+      }
+    });
+  } else {
+    utilities.sendResponse(null, null, 500, res);
+  }
+});
+
+
 module.exports = router;
