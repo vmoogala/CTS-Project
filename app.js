@@ -7,6 +7,7 @@ var logger = require('morgan');
 //Added Imports
 var cors = require('cors');
 var fs = require('fs');
+var session = require('express-session');
 
 //Routers
 var indexRouter = require('./routes/index');
@@ -19,6 +20,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(cors());
+
+app.use(session({
+  // Default is good for now
+  // genid: function(req) {
+  //   return uuidv4(); // use UUIDs for session IDs
+  // },
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    path: "/",
+    // secure: true, //// TODO: make connection HTTPS and uncomment
+    maxAge: 60000
+  }
+}))
 
 //For logging
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
