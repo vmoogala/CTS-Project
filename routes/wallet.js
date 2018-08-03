@@ -29,4 +29,21 @@ router.post('/addMoneyToWallet', function(req, res, next) {
   }
 });
 
+
+router.get('/getCurrentBalance', function(req, res, next) {
+  console.log('/getCurrentBalance');
+  if (req.session.userName) {
+    db.query('select wallet_balance, wallet_id from user_wallet where user_id = (select user_id from user_info where user_name = ?);', req.session.userName, function(error, results, fields) {
+      if (error) {
+        console.log(error);
+        utilities.sendResponse(error, null, 500, res);
+      } else {
+        utilities.sendResponse(null, results, 200, res);
+      }
+    });
+  } else {
+    utilities.sendResponse(null, null, 500, res);
+  }
+});
+
 module.exports = router;
