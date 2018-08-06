@@ -45,7 +45,8 @@ modAddVehicle.getAllVehicles = function() {
       // response = JSON.parse(response);
       if (response.status == 200 && response.error == null) {
         // TODO: format data
-        $('#listAllVehicles').append("<pre>" + response.response + "</pre>")
+        modAddVehicle.formUIForAllVehicles(response.response);
+        // $('#listAllVehicles').append("<pre>" + JSON.stringify(response.response) + "</pre>")
       } else {
         alert("Cannot perform operation. Please try again Reason:" + response.response);
       }
@@ -54,6 +55,19 @@ modAddVehicle.getAllVehicles = function() {
       alert("Cannot perform operation. Please try again Reason:" + error);
     }
   });
+}
+
+modAddVehicle.formUIForAllVehicles = function(response) {
+
+  var htmlstring = "";
+
+  for (var x = 0; x < response.length; x++) {
+    htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
+      <td>' + response[x].vehicle_VIN + '</td><td>' + response[x].vehicle_class_type + '</td></tr>'
+  }
+
+  $("#listAllVehicles").append(htmlstring);
+
 }
 
 modAddVehicle.getAllVehicles();
