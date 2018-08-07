@@ -26,3 +26,13 @@ modApp.logout = function() {
   });
 
 };
+
+
+modApp.showLoader = function(){
+$("#loader").show();
+};
+
+
+modApp.hideLoader = function(){
+$("#loader").hide();
+};
