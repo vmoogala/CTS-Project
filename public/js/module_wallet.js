@@ -37,7 +37,7 @@ modWallet.getCurrentWalletBalance = function() {
       // response = JSON.parse(response);
       if (response.status == 200 && response.error == null) {
         // TODO: format data
-        $('#currentBalance').text(JSON.stringify(response));
+        $('#currentBalance').text("Current Balance : " + JSON.stringify(response.response[0].wallet_balance) + "$");
       } else {
         alert("Cannot perform operation. Please try again Reason:" + response.response);
       }

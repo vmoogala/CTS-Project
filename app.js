@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var vehicleRequestsRouter = require('./routes/vehicleRequests');
 var walletRouter = require('./routes/wallet');
+var CtsVerificationPortalApiRouter = require('./routes/CtsVerificationApi');
 
 var app = express();
 
@@ -34,7 +35,7 @@ app.use(session({
   cookie: {
     path: "/",
     // secure: true, //// TODO: make connection HTTPS and uncomment
-    maxAge: 60000
+    maxAge: 600000
   }
 }))
 
@@ -58,6 +59,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/vehicleRequests', vehicleRequestsRouter);
 app.use('/wallet', walletRouter);
+app.use('/CtsVerificationApi', CtsVerificationPortalApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,6 +81,6 @@ module.exports = app;
 
 // TODO: To start the server at the end without using debug mode
 
-// var httpServer = require('http').createServer(app).listen(3001, function() {
-//   console.log('Http server started');
-// });
+var httpServer = require('http').createServer(app).listen(3000, function() {
+  console.log('Http server started');
+});

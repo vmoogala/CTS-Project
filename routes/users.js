@@ -41,7 +41,7 @@ router.post('/userRegistration/', function(req, res, next) {
 router.post('/userAuthenticate/', function(req, res, next) {
   if (req.body) {
     console.log(req.body);
-    db.query('select password_hash from user_info where user_name = ?', [req.body.userName], function(error, results, fields) {
+    db.query('select password_hash, user_id from user_info where user_name = ?', [req.body.userName], function(error, results, fields) {
       if (error) {
         console.log(error);
         utilities.sendResponse(error, null, 500, res);
@@ -55,6 +55,7 @@ router.post('/userAuthenticate/', function(req, res, next) {
               console.log(req.session);
               var session = req.session;
               session.userName = req.body.userName;
+              session.userId = results[0].user_id;
               utilities.sendResponse(null, "success", 200, res);
             } else {
               // Passwords don't match

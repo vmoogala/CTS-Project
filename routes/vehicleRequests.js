@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const utilities = require('../utilities');
 var db = require('../db_connection');
+const uuidv4 = require('uuid/v4');
+var request = require('request');
+
 
 router.get('/getAllVehicles', function(req, res, next) {
   console.log("/getAllVehicles");
@@ -24,19 +27,49 @@ router.get('/getAllVehicles', function(req, res, next) {
   }
 });
 
+
 router.post('/addAVehicle/', function(req, res, next) {
+  console.log('/addAVehicle/');
   if (req.body && req.session.userName) {
     console.log(req.body);
-    var params = [req.session.userName, req.body.vin, req.body.vehicleClass];
-    console.log(params);
-    db.query('insert into vehicle_info (user_id, vehicle_VIN, vehicle_class_type) values ((select user_id from user_info where user_name = ?), ?, ?)', params, function(error, results, fields) {
-      if (error) {
-        console.log(error);
-        utilities.sendResponse(error, null, 500, res);
-      } else {
-        utilities.sendResponse(null, "success", 200, res);
+    var data = {
+      "applicationId": uuidv4(),
+      "vin": req.body.vin,
+      "vehicleClass": req.body.vehicleClass,
+      "applicantName": req.session.userName,
+      "userId": req.session.userId,
+    };
+    console.log(data);
+    request({
+        url: "http://0.0.0.0:3001/CtsPortalApi/addNewVehicleRequest/",
+        method: "POST",
+        json: true,
+        body: data
+      },
+      function(error, response, body) {
+        if(error == null){
+        console.log(body);
+          if (body.error == null && body.status == 200 && body.response == "success") {
+            console.log("call verification url success");
+            // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+            var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            var params = [data.applicationId, data.vin, data.vehicleClass, data.applicantName, timestamp, data.userId];
+            db.query('insert into applications (application_id, VIN, vehicle_class_type, applicant_name, applied_date, user_id) values (?, ?, ?, ?, ?, ?)', params, function(error, results, fields) {
+              if (error) {
+                console.log(error);
+                utilities.sendResponse(error, null, 500, res);
+              } else {
+                utilities.sendResponse(null, "success", 200, res);
+              }
+            });
+          } else {
+            console.log("error-->" + error);
+            utilities.sendResponse(error, null, 500, res);
+          }
+        }        
+
       }
-    });
+    );
   } else {
     utilities.sendResponse(null, null, 500, res);
   }
