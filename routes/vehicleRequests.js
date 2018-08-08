@@ -76,4 +76,26 @@ router.post('/addAVehicle/', function(req, res, next) {
 });
 
 
+router.get('/getAllRequests', function(req, res, next) {
+  console.log('/getAllRequests');
+  if (req.session.userName) {
+    db.query('select * from applications where user_id = ?;', [req.session.userId], function(error, results, fields) {
+      if (error) {
+        console.log(error);
+        utilities.sendResponse(error, null, 500, res);
+      } else {
+        // console.log(results);
+        if (results.length > 0) {
+          utilities.sendResponse(null, results, 200, res);
+        } else {
+          utilities.sendResponse(null, "no vehicles found", 200, res);
+        }
+      }
+    });
+  } else {
+    utilities.sendResponse(null, null, 500, res);
+  }
+});
+
+
 module.exports = router;

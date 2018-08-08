@@ -15,7 +15,7 @@
 <body>
   <div class="loader" id="loader"></div>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">CTS-Verification</a>
+    <a class="navbar-brand" href="index.html">CTS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,8 +23,9 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="login.html">Login</a>
         <a class="nav-item nav-link" href="registration.html">Registration</a>
-        <a class="nav-item nav-link active" href="#">Requests</a>
-        <a class="nav-item nav-link" href="addVehicle.html">Add Vehicle</a>
+        <a class="nav-item nav-link" href="wallet.html">My Wallet</a>
+        <a class="nav-item nav-link" href="addVehicle.html">My Vehicles</a>
+        <a class="nav-item nav-link" href="vehicleRequests.html">My Requests</a>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Options
@@ -47,34 +48,30 @@
           <thead class="thead-light">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Vehicle No</th>
-              <th scope="col">Raised By</th>
-              <th scope="col">Accept</th>
-              <th scope="col">Reject</th>
+              <th scope="col">Vehicle VIN</th>
+              <th scope="col">Raised On</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody id="table_all_requests">
-            <tr>
+<!--             <tr>
               <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td><button type="button" class="btn btn-primary">Accept</button></td>
-              <td><button type="button" class="btn btn-warning">Reject</button></td>
+              <td>Accepted</td>
             </tr>
             <tr>
               <th scope="row">2</th>
               <td>Jacob</td>
               <td>Thornton</td>
-              <td><button type="button" class="btn btn-primary">Accept</button></td>
-              <td><button type="button" class="btn btn-danger">Reject</button></td>
+              <td>Accepted</td>
             </tr>
             <tr>
               <th scope="row">3</th>
               <td>Larry</td>
               <td>the Bird</td>
-              <td><button type="button" class="btn btn-primary">Accept</button></td>
-              <td><button type="button" class="btn btn-info">Reject</button></td>
-            </tr>
+            <td>Rejected</td>
+            </tr> -->
           </tbody>
         </table>
       </div>
