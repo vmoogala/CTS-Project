@@ -41,3 +41,5 @@ modVehicleRequests.formUIForRequests = function(data){
   $("#table_all_requests").append(htmlstring);
 
 }
+
+modVehicleRequests.getAllRequests();

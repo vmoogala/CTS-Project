@@ -50,6 +50,7 @@
       <!-- <form class="col-12" id="AddMoneyToWalletForm" action="javascript: modWallet.AddMoneyToWallet() "> -->
       <div class="form-group">
         <input required name="amount" type="number" placeholder="Enter money you want to add" class="form-control" id="amount">
+        <p> Amount can contain value upto 2 decimal points. If no amount is specified 10$ is default</p>
       </div>
       <!-- <div class="form-group">
         <button type="submit" class="btn btn-outline-dark btn-large col-12">Add Money</button>
@@ -84,8 +85,8 @@
         return actions.payment.create({
           transactions: [{
             amount: {
-              total: '0.01',
-              currency: 'USD'
+              total: modWallet.getPaymentAmount(),
+              currency: 'CAD'
             }
           }]
         });

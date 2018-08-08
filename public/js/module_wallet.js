@@ -48,4 +48,16 @@ modWallet.getCurrentWalletBalance = function() {
   });
 }
 
+modWallet.getPaymentAmount = function(){
+  var amount = parseFloat($("#amount").val());
+
+  if(amount >= 0.01){
+    return amount;
+  }else{
+    return 10;
+  }
+
+ return "hello";
+};
+
 modWallet.getCurrentWalletBalance();
