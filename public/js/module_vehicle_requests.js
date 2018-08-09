@@ -30,19 +30,23 @@ modVehicleRequests.getAllRequests = function() {
 modVehicleRequests.formUIForRequests = function(data1) {
   var htmlstring = "";
 
-  for (var x = 0; x < data1.length; x++) {
-    htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
+  if (data1.length > 0 && Array.isArray(data1)) {
+    for (var x = 0; x < data1.length; x++) {
+      htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
       <td>' + data1[x].VIN + '</td><td>' + data1[x].number_plate + '</td><td>' + modApp.formatUTCTime(data1[x].applied_date) + '</td>';
 
-    if (data1[x].status == "submitted") {
-      htmlstring += '<td> submitted </td> </tr>';
-    } else {
-      htmlstring += '<td>' + data1[x].status + ' on ' + modApp.formatUTCTime(data1[x].status_date) + '</td> </tr>';
+      if (data1[x].status == "submitted") {
+        htmlstring += '<td> submitted </td> </tr>';
+      } else {
+        htmlstring += '<td>' + data1[x].status + ' on ' + modApp.formatUTCTime(data1[x].status_date) + '</td> </tr>';
+      }
     }
+
+    $("#table_all_requests").append(htmlstring);
+  } else {
+    htmlstring = "<h4> No Requests Found</h4>";
+    $("#emptyMessage").append(htmlstring);
   }
-
-  $("#table_all_requests").append(htmlstring);
-
 }
 
 

@@ -67,14 +67,17 @@ modAddVehicle.getAllVehicles = function() {
 modAddVehicle.formUIForAllVehicles = function(response) {
 
   var htmlstring = "";
-
-  for (var x = 0; x < response.length; x++) {
-    htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
+  if (response.length > 0 && Array.isArray(response)) {
+    for (var x = 0; x < response.length; x++) {
+      htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
       <td>' + response[x].vehicle_VIN + '</td><td>' + response[x].number_plate + '</td><td>' + response[x].vehicle_class_type + '</td></tr>'
+    }
+
+    $("#listAllVehicles").append(htmlstring);
+  } else {
+    htmlstring = "<h4> No Vehicles Found</h4>";
+    $("#emptyMessage").append(htmlstring);
   }
-
-  $("#listAllVehicles").append(htmlstring);
-
 }
 
 modAddVehicle.getAllVehicles();
