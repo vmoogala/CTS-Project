@@ -8,6 +8,7 @@ modSettings.changePassword = function() {
   console.log(userPassword, confirmPassword);
 
   if (userPassword == confirmPassword) {
+    modApp.showLoader();
     $.ajax({
       type: "POST",
       dataType: 'json',
@@ -16,6 +17,7 @@ modSettings.changePassword = function() {
         "userPassword": userPassword
       },
       success: function(response) {
+        modApp.hideLoader();
         if (response.status == 200 && response.error == null && response.response == "success") {
           alert("Password changed successfully");
           $('#Password').val("");
@@ -25,9 +27,11 @@ modSettings.changePassword = function() {
         }
       },
       error: function(request, status, error) {
+        modApp.hideLoader();
         alert("Cannot perform operation. Please try again Reason:" + error);
       }
     });
+
   } else {
     alert("Password and Confirm Password must be the same");
   }

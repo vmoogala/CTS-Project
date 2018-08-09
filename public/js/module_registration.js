@@ -14,6 +14,7 @@ modRegistration.registerUser = function() {
   if (userPassword != confirmPassword) {
     alert("password and confirm password do not match");
   } else {
+    modApp.showLoader();
     $.ajax({
       type: "POST",
       dataType: 'json',
@@ -27,6 +28,7 @@ modRegistration.registerUser = function() {
         "phoneNumber": phoneNumber
       },
       success: function(response) {
+        modApp.hideLoader();
         if (response.status == 200 && response.error == null && response.response == "success") {
           window.location.href = "login.html";
         } else {
@@ -34,9 +36,11 @@ modRegistration.registerUser = function() {
         }
       },
       error: function(request, status, error) {
+        modApp.hideLoader();
         alert("Cannot perform operation. Please try again Reason:" + error);
       }
     });
+
     modRegistration.clearRegistrationForm();
   }
 };

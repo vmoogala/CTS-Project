@@ -2,12 +2,13 @@ var modVehicleRequests = {};
 
 modVehicleRequests.getAllRequests = function() {
   console.log("modVehicleRequests.getAllRequests");
-
+  modApp.showLoader();
   $.ajax({
     type: "GET",
     url: constants.service_url + "vehicleRequests/getAllRequests",
     success: function(response) {
       console.log(response);
+      modApp.hideLoader();
       response = JSON.parse(response);
       if (response.status == 200 && response.error == null) {
         // TODO: format data
@@ -18,9 +19,11 @@ modVehicleRequests.getAllRequests = function() {
       }
     },
     error: function(request, status, error) {
+      modApp.hideLoader();
       alert("Cannot perform operation. Please try again Reason:" + error);
     }
   });
+
 };
 
 
@@ -41,5 +44,6 @@ modVehicleRequests.formUIForRequests = function(data1) {
   $("#table_all_requests").append(htmlstring);
 
 }
+
 
 modVehicleRequests.getAllRequests();

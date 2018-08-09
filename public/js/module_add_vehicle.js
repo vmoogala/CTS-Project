@@ -2,7 +2,7 @@ var modAddVehicle = {};
 
 modAddVehicle.addAVehicle = function() {
   console.log("modAddVehicle.addAVehicle");
-
+  modApp.showLoader();
   $.ajax({
     type: "POST",
     dataType: 'json',
@@ -13,6 +13,7 @@ modAddVehicle.addAVehicle = function() {
       "numberPlate": $("#numberPlate").val()
     },
     success: function(response) {
+      modApp.hideLoader();
       console.log(response);
       // response = JSON.parse(response);
       if (response.status == 200 && response.error == null && response.response == "success") {
@@ -23,9 +24,11 @@ modAddVehicle.addAVehicle = function() {
       }
     },
     error: function(request, status, error) {
+      modApp.hideLoader();
       alert("Cannot perform operation. Please try again Reason:" + error);
     }
   });
+
 
   modAddVehicle.clearAddVehicleForm();
 };
@@ -36,13 +39,14 @@ modAddVehicle.clearAddVehicleForm = function() {
 
 modAddVehicle.getAllVehicles = function() {
   console.log("modAddVehicle.getAllVehicles");
-
+  modApp.showLoader();
   $.ajax({
     type: "GET",
     dataType: 'json',
     url: constants.service_url + "vehicleRequests/getAllVehicles",
     success: function(response) {
       console.log(response);
+      modApp.hideLoader();
       // response = JSON.parse(response);
       if (response.status == 200 && response.error == null) {
         // TODO: format data
@@ -53,9 +57,11 @@ modAddVehicle.getAllVehicles = function() {
       }
     },
     error: function(request, status, error) {
+      modApp.hideLoader();
       alert("Cannot perform operation. Please try again Reason:" + error);
     }
   });
+
 }
 
 modAddVehicle.formUIForAllVehicles = function(response) {
