@@ -15,6 +15,7 @@ var usersRouter = require('./routes/users');
 var vehicleRequestsRouter = require('./routes/vehicleRequests');
 var walletRouter = require('./routes/wallet');
 var CtsVerificationPortalApiRouter = require('./routes/CtsVerificationApi');
+var CtsBoothOperatorApiRouter = require('./routes/CtsBoothOperatorApi');
 
 var app = express();
 
@@ -60,6 +61,7 @@ app.use('/users', usersRouter);
 app.use('/vehicleRequests', vehicleRequestsRouter);
 app.use('/wallet', walletRouter);
 app.use('/CtsVerificationApi', CtsVerificationPortalApiRouter);
+app.use('/CtsBoothOperatorApi', CtsBoothOperatorApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
