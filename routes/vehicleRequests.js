@@ -100,7 +100,7 @@ router.post('/addAVehicle/', function(req, res, next) {
 router.get('/getAllRequests', function(req, res, next) {
   console.log('/getAllRequests');
   if (req.session.userName) {
-    db.query('select * from applications where user_id = ?;', [req.session.userId], function(error, results, fields) {
+    db.query('select * from applications where user_id = ? order by applied_date asc;', [req.session.userId], function(error, results, fields) {
       if (error) {
         console.log(error);
         utilities.sendResponse(error, null, 500, res);
