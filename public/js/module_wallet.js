@@ -16,6 +16,7 @@ modWallet.AddMoneyToWallet = function() {
       modApp.hideLoader();
       if (response.status == 200 && response.error == null && response.response == "success") {
         alert("amount has been successfully added");
+        modWallet.getCurrentWalletBalance();
       } else {
         alert("Cannot perform operation. Please try again Reason:" + response.response);
       }
