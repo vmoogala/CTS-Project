@@ -29,12 +29,12 @@ modVehicleRequests.formUIForRequests = function(data1) {
 
   for (var x = 0; x < data1.length; x++) {
     htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
-      <td>' + data1[x].VIN + '</td><td>' + data1[x].number_plate + '</td><td>' + data1[x].applied_date + '</td>';
+      <td>' + data1[x].VIN + '</td><td>' + data1[x].number_plate + '</td><td>' + modApp.formatUTCTime(data1[x].applied_date) + '</td>';
 
     if (data1[x].status == "submitted") {
       htmlstring += '<td> submitted </td> </tr>';
     } else {
-      htmlstring += '<td>' + data1[x].status + ' on ' + data1[x].status_date + '</td> </tr>';
+      htmlstring += '<td>' + data1[x].status + ' on ' + modApp.formatUTCTime(data1[x].status_date) + '</td> </tr>';
     }
   }
 

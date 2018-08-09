@@ -28,11 +28,19 @@ modApp.logout = function() {
 };
 
 
-modApp.showLoader = function(){
-$("#loader").show();
+modApp.showLoader = function() {
+  $("#loader").show();
 };
 
 
-modApp.hideLoader = function(){
-$("#loader").hide();
+modApp.hideLoader = function() {
+  $("#loader").hide();
 };
+
+
+modApp.formatUTCTime = function(serverDate) {
+  // dateTimeSplitted = serverDate.split(" ");
+  // var utcTime = dateTimeSplitted[0] + "T" + dateTimeSplitted[1] + ".000Z";
+  var localDate = new Date(serverDate);
+  return localDate.toLocaleString();
+}
