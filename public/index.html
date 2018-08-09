@@ -16,37 +16,34 @@
   <div class="loader" id="loader"></div>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">CTS</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="login.html">Login</a>
-        <a class="nav-item nav-link" href="registration.html">Registration</a>
-        <a class="nav-item nav-link" href="wallet.html">My Wallet</a>
-        <a class="nav-item nav-link" href="addVehicle.html">My Vehicles</a>
-        <a class="nav-item nav-link" href="vehicleRequests.html">My Requests</a>
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Options
-  </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="settings.html">Settings</a>
-            <button class="dropdown-item" onclick="modApp.logout()">Logout</button>
-          </div>
-        </div>
-        <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
-      </div>
-    </div>
   </nav>
   <div class="container-fluid">
     <div class="container">
+      <!-- <br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='login.html'">Login</button>
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='registration.html'">Registration</button> -->
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='wallet.html'">My Wallet</button>
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='addVehicle.html'">My Vehicles</button>
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='vehicleRequests.html'">My Requests</button>
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="window.location.href='settings.html'">Settings</button>
+      <br><br>
+      <button type="button" class="btn btn-outline-dark col-12" onclick="modApp.logout()">Logout</button>
     </div>
   </div>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
   <script src="js/module_app.js"></script>
+  <script>
+    if (constants.localStorage.getItem("isLoggedIn") == "false") {
+      window.location.href = "login.html";
+    }
+  </script>
 </body>
 
 

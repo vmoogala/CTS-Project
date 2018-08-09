@@ -24,6 +24,7 @@ modLogin.authenticateUser = function() {
     success: function(response) {
       modApp.hideLoader();
       if (response.status == 200 && response.error == null && response.response == "success") {
+        constants.localStorage.setItem("isLoggedIn", "true");
         window.location.href = "index.html";
       } else {
         alert("Cannot perform operation. Please try again Reason:" + response.response);

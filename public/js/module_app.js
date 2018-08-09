@@ -15,6 +15,7 @@ modApp.logout = function() {
     success: function(response) {
       if (response.status == 200 && response.error == null && response.response == "success") {
         alert("You have been successfully logged out");
+        constants.localStorage.setItem("isLoggedIn", "false");
         window.location.href = "index.html";
       } else {
         alert("Cannot perform operation. Please try again Reason:" + response.response);
