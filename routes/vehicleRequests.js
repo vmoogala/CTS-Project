@@ -38,6 +38,7 @@ router.post('/addAVehicle/', function(req, res, next) {
       "vehicleClass": req.body.vehicleClass,
       "applicantName": req.session.userName,
       "userId": req.session.userId,
+      "numberPlate": req.body.numberPlate
     };
     console.log(data);
     request({
@@ -67,8 +68,8 @@ router.post('/addAVehicle/', function(req, res, next) {
                     console.log("call verification url success");
                     // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
                     var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-                    var params = [data.applicationId, data.vin, data.vehicleClass, data.applicantName, timestamp, data.userId];
-                    db.query('insert into applications (application_id, VIN, vehicle_class_type, applicant_name, applied_date, user_id) values (?, ?, ?, ?, ?, ?)', params, function(error, results, fields) {
+                    var params = [data.applicationId, data.vin, data.vehicleClass, data.applicantName, timestamp, data.userId, data.numberPlate];
+                    db.query('insert into applications (application_id, VIN, vehicle_class_type, applicant_name, applied_date, user_id, number_plate) values (?, ?, ?, ?, ?, ?, ?)', params, function(error, results, fields) {
                       if (error) {
                         console.log(error);
                         utilities.sendResponse(error, null, 500, res);

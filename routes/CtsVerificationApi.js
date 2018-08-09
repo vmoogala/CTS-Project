@@ -21,8 +21,8 @@ router.post('/ApplicationStatusMonitor/', function(req, res, next) {
             utilities.sendResponse(error, null, 500, res);
           } else {
             if (data.status == "accept") {
-              var params = [results[0].user_id, results[0].VIN, results[0].vehicle_class_type];
-              db.query('insert into vehicle_info (user_id, vehicle_VIN, vehicle_class_type) values (?, ?, ?)', params, function(error, results, fields) {
+              var params = [results[0].user_id, results[0].VIN, results[0].vehicle_class_type, results[0].number_plate];
+              db.query('insert into vehicle_info (user_id, vehicle_VIN, vehicle_class_type, number_plate) values (?, ?, ?, ?)', params, function(error, results, fields) {
                 if (error) {
                   console.log(error);
                   utilities.sendResponse(error, null, 500, res);

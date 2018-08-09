@@ -9,7 +9,8 @@ modAddVehicle.addAVehicle = function() {
     url: constants.service_url + "vehicleRequests/addAVehicle",
     data: {
       "vin": $("#vin").val(),
-      "vehicleClass": $("#vehicleClass").val()
+      "vehicleClass": $("#vehicleClass").val(),
+      "numberPlate": $("#numberPlate").val()
     },
     success: function(response) {
       console.log(response);
@@ -63,7 +64,7 @@ modAddVehicle.formUIForAllVehicles = function(response) {
 
   for (var x = 0; x < response.length; x++) {
     htmlstring += '<tr> <th scope="row">' + (x + 1) + ' </th> \
-      <td>' + response[x].vehicle_VIN + '</td><td>' + response[x].vehicle_class_type + '</td></tr>'
+      <td>' + response[x].vehicle_VIN + '</td><td>' + response[x].number_plate + '</td><td>' + response[x].vehicle_class_type + '</td></tr>'
   }
 
   $("#listAllVehicles").append(htmlstring);
