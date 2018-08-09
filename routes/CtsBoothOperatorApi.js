@@ -64,7 +64,10 @@ router.post('/getVehicleBalance/', function(req, res, next) {
                         console.log(error);
                         utilities.sendResponse(error, null, 500, res);
                       } else {
-                        utilities.sendResponse(null, "success", 200, res);
+                        utilities.sendResponse(null, {
+                          "status": "success",
+                          "amount": amountToBeDeducted
+                        }, 200, res);
                       }
                     });
                   }
