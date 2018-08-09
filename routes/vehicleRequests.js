@@ -42,7 +42,7 @@ router.post('/addAVehicle/', function(req, res, next) {
     };
     console.log(data);
     request({
-        url: "http://0.0.0.0:3001/users/userAuthenticate/",
+        url: utilities.constants.verificationPortalURL + "users/userAuthenticate/",
         method: "POST",
         json: true,
         body: {
@@ -56,7 +56,7 @@ router.post('/addAVehicle/', function(req, res, next) {
           if (body.error == null && body.status == 200 && body.response == "success") {
             console.log("login in verification portal success");
             request({
-                url: "http://0.0.0.0:3001/CtsPortalApi/addNewVehicleRequest/",
+                url: utilities.constants.verificationPortalURL + "CtsPortalApi/addNewVehicleRequest/",
                 method: "POST",
                 json: true,
                 body: data

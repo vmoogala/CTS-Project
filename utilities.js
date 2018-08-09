@@ -11,4 +11,8 @@ utilities.sendResponse = function(error, response, status, res) {
   }));
 };
 
+utilities.constants = {
+  "verificationPortalURL": "http://0.0.0.0:3001/"
+};
+
 module.exports = utilities;
